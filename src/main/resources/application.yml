@@ -1,0 +1,24 @@
+server:
+  port: 9093
+spring:
+  jackson:
+    generator:
+      write_numbers_as_strings: true
+    time-zone: GMT+8
+mybatis-plus:
+  global-config:
+    banner: false
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+---
+spring:
+  datasource:
+    username: root
+    password: 123123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/fkx?useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&useSSL=false&serverTimezone=GMT%2b8
+---
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
