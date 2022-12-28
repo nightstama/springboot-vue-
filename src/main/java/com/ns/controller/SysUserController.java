@@ -68,5 +68,9 @@ public class SysUserController{
         return sysUserService.removeBatchByIds(ids);
     }
 
+    @PostMapping("/export")
+    public void export(SysUser user){
+        sysUserService.export(user);
+    }
 }
 

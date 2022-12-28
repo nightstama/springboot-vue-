@@ -10,6 +10,8 @@ mybatis-plus:
     banner: false
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+upload:
+  path: E:\test
 ---
 spring:
   datasource:

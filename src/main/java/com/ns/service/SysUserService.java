@@ -16,5 +16,7 @@ import java.util.List;
  */
 public interface SysUserService extends IService<SysUser> {
     IPage<SysUser> search(@RequestBody SysUser user);
+
+    void export(SysUser user);
 }
 
