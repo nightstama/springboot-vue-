@@ -1,5 +1,7 @@
 package com.ns;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.ns.dao.SysUserDao;
 import com.ns.entity.SysUser;
@@ -22,7 +24,7 @@ class ManageSystemApplicationTests {
 
 	@Test
 	void test(){
-		System.out.println(userDao.findAll());
+		System.out.println();
 	}
 
 }

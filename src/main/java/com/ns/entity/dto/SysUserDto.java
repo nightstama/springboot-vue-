@@ -12,6 +12,7 @@ import java.util.Date;
 public class SysUserDto {
     @ExcelProperty("用户名")
     private String username;
+    private String password;
     @ExcelProperty("昵称")
     private String nickname;
     @ExcelProperty("邮箱")

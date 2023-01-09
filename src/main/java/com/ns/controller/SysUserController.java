@@ -2,12 +2,15 @@ package com.ns.controller;
 
 
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.ns.common.Constants;
+import com.ns.common.Result;
 import com.ns.entity.SysUser;
+import com.ns.entity.dto.SysUserDto;
 import com.ns.service.SysUserService;
-import com.ns.util.ResultData;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -27,7 +30,7 @@ import java.util.Map;
  * @since 2022-12-15 10:37:36
  */
 @RestController
-@RequestMapping("/sysUser")
+@RequestMapping("/user")
 @Api(tags = "管理员管理")
 public class SysUserController{
     @Resource
@@ -69,8 +72,20 @@ public class SysUserController{
     }
 
     @PostMapping("/export")
-    public void export(SysUser user){
-        sysUserService.export(user);
+    public boolean export(SysUser user){
+        return sysUserService.export(user);
     }
+
+    @PostMapping("/login")
+    public Result login(@RequestBody SysUserDto userDto){
+        String username= userDto.getUsername();
+        String password= userDto.getPassword();
+        if (StrUtil.isBlank(username) || StrUtil.isBlank(password)){
+            return Result.error(Constants.CODE_400,"参数错误");
+        }
+        SysUserDto dto = sysUserService.login(userDto);
+        return Result.success(dto);
+    }
+
 }
 

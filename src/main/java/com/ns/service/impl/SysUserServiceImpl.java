@@ -1,5 +1,7 @@
 package com.ns.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.log.Log;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.write.metadata.WriteSheet;
@@ -8,9 +10,11 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.ns.common.Constants;
 import com.ns.dao.SysUserDao;
 import com.ns.entity.SysUser;
 import com.ns.entity.dto.SysUserDto;
+import com.ns.exception.BusinessException;
 import com.ns.service.SysUserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -34,6 +38,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUser> impleme
     private SysUserDao sysUserDao;
     @Value("${upload.path}")
     private String path;
+    private static final Log LOG=Log.get();
     @Override
     public IPage<SysUser> search(@RequestBody SysUser user) {
         QueryWrapper<SysUser> wrapper=new QueryWrapper<>();
@@ -45,19 +50,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUser> impleme
     }
 
     @Override
-    public void export(SysUser user) {
+    public boolean export(SysUser user) {
         List<SysUser> list=selectExport(user);
-//        if (list!=null&& !list.isEmpty()){
-//            List<SysUserDto> list1=new ArrayList<>();
-//            for (SysUser sysUser : list) {
-//                SysUserDto sysUserDto=new SysUserDto();
-//                BeanUtils.copyProperties(sysUser,sysUserDto);
-//                list1.add(sysUserDto);
-//            }
-//        }
-
-
-
         String fileName="管理员信息表—"+System.currentTimeMillis()+".xlsx";
         String filePath=path+fileName;
         filePath = filePath.replace("\\\\", "\\");
@@ -68,10 +62,31 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUser> impleme
 
 
 
-        WriteSheet writeSheet = EasyExcel.writerSheet().head(SysUser.class).build();
+        WriteSheet writeSheet = EasyExcel.writerSheet().head(SysUserDto.class).build();
         excelWriter.write(list,writeSheet);
         excelWriter.finish();
+        return true;
     }
+
+    @Override
+    public SysUserDto login(SysUserDto userDto) {
+        QueryWrapper<SysUser> wrapper=new QueryWrapper();
+        wrapper.eq("username",userDto.getUsername());
+        wrapper.eq("password",userDto.getPassword());
+        try {
+            SysUser one = getOne(wrapper);
+            if (one!=null){
+                BeanUtil.copyProperties(one,userDto,true);
+                return userDto;
+            }else {
+                throw new BusinessException(Constants.CODE_600,"用户名密码错误");
+            }
+        }catch (Exception e){
+            LOG.error(e);
+            throw new BusinessException(Constants.CODE_500,"系统错误");
+        }
+    }
+
     public List<SysUser> selectExport(SysUser user){
         QueryWrapper<SysUser> wrapper=new QueryWrapper<>();
         wrapper.like(user.getUsername()!=null,"username",user.getUsername());
