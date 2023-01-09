@@ -14,10 +14,6 @@
         <result property="avatarUrl" column="avatar_url" jdbcType="VARCHAR"/>
         <result property="role" column="role" jdbcType="VARCHAR"/>
     </resultMap>
-    <select id="findAll" resultType="com.ns.entity.SysUser">
-        select * from sys_user
-    </select>
-
 
 </mapper>
 

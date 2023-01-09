@@ -1,12 +1,10 @@
 package com.ns.service;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.ns.common.Result;
 import com.ns.entity.SysUser;
-import org.springframework.web.bind.annotation.RequestBody;
-
-import java.util.List;
+import com.ns.entity.dto.SysUserDto;
 
 /**
  * (SysUser)表服务接口
@@ -15,8 +13,10 @@ import java.util.List;
  * @since 2022-12-15 10:37:39
  */
 public interface SysUserService extends IService<SysUser> {
-    IPage<SysUser> search(@RequestBody SysUser user);
+    IPage<SysUser> search(SysUser user);
 
-    void export(SysUser user);
+    Result export(SysUser user);
+
+    SysUserDto login(SysUserDto userDto);
 }
 

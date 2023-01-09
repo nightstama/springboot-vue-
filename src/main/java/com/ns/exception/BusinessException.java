@@ -1,18 +1,20 @@
 package com.ns.exception;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@Getter
 public class BusinessException extends RuntimeException {
 
-    private final Long code;
+    private final String code;
 
-    public BusinessException(long code, String message) {
+    public BusinessException(String code, String message) {
         super(message);
         this.code = code;
     }
 
-    public Long getCode() {
+    public String getCode() {
         return code;
     }
 

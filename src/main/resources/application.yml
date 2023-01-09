@@ -10,17 +10,22 @@ mybatis-plus:
     banner: false
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+ali:
+  ossKey: LTAI5tGowAKox4saTmmzXT2Y
+  ossSecret: gTdXc406440glMmzlg0h9NTpun0o18
+  ossRoleArn: acs:ram::1986255198766609:role/admin
+
 upload:
-  path: E:\test
+  path: /tmp/upload
 ---
 spring:
   datasource:
     username: root
     password: 123123
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/fkx?useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&useSSL=false&serverTimezone=GMT%2b8
+    url: jdbc:mysql://localhost:3306/ums?useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&useSSL=false&serverTimezone=GMT%2b8
 ---
 spring:
   mvc:
-    pathmatch:
+    path match:
       matching-strategy: ant_path_matcher
