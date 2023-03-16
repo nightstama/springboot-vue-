@@ -11,6 +11,7 @@ import com.ns.common.Result;
 import com.ns.entity.SysUser;
 import com.ns.entity.dto.SysUserDto;
 import com.ns.service.SysUserService;
+import com.ns.service.UploadService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -35,7 +36,14 @@ import java.util.Map;
 public class SysUserController{
     @Resource
     public SysUserService sysUserService;
+    @Resource
+    public UploadService uploadService;
 
+    /**
+     * 查询用户
+     * @param user
+     * @return
+     */
     @ApiOperation(value = "管理员查询",notes = "查询管理员")
     @PostMapping("/page")
     public Map<String,Object> search(@RequestBody SysUser user){
@@ -49,6 +57,12 @@ public class SysUserController{
         res.put("data", data);
         return res;
     }
+
+    /**
+     * 添加用户
+     * @param user
+     * @return
+     */
     @PostMapping("/save")
     public boolean save(@RequestBody SysUser user){
         if (user.getId()==null){
@@ -58,24 +72,51 @@ public class SysUserController{
         }
     }
 
+    /**
+     * 更新用户
+     * @param user
+     * @return
+     */
     @PostMapping("/update")
     public boolean update(@RequestBody SysUser user){
         return sysUserService.updateById(user);
     }
+
+    /**
+     * 删除
+     * @param id
+     * @return
+     */
     @DeleteMapping("/delete/{id}")
     public boolean delete(@PathVariable Long id){
         return sysUserService.removeById(id);
     }
+
+    /**
+     * 批量删除
+     * @param ids
+     * @return
+     */
     @PostMapping("/deleteBatch")
     public boolean deleteBatch(@RequestBody List<Long> ids){
         return sysUserService.removeBatchByIds(ids);
     }
 
+    /**
+     * 导出
+     * @param user
+     * @return
+     */
     @PostMapping("/export")
     public boolean export(SysUser user){
         return sysUserService.export(user);
     }
 
+    /**
+     * 登录
+     * @param userDto
+     * @return
+     */
     @PostMapping("/login")
     public Result login(@RequestBody SysUserDto userDto){
         String username= userDto.getUsername();
@@ -85,7 +126,17 @@ public class SysUserController{
         }
         SysUserDto dto = sysUserService.login(userDto);
         return Result.success(dto);
+
     }
+
+    /**
+     * 上传文件
+     */
+    @PostMapping("/File/upload")
+    public Map<String,Object> upload(){
+        return uploadService.upload();
+    }
+
 
 }
 

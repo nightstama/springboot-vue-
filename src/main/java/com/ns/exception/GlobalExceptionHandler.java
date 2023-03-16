@@ -13,5 +13,4 @@ public class GlobalExceptionHandler {
     public Result handle(BusinessException exception){
         return Result.error(exception.getCode(), exception.getMessage());
     }
-
 }

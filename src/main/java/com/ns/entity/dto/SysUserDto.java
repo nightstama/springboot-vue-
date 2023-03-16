@@ -27,4 +27,6 @@ public class SysUserDto {
     private String avatarUrl;
     @ExcelProperty("角色")
     private String role;
+    private String token;
+
 }

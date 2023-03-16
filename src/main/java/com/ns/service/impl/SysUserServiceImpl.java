@@ -16,6 +16,7 @@ import com.ns.entity.SysUser;
 import com.ns.entity.dto.SysUserDto;
 import com.ns.exception.BusinessException;
 import com.ns.service.SysUserService;
+import com.ns.util.TokenUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -77,6 +78,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUser> impleme
             SysUser one = getOne(wrapper);
             if (one!=null){
                 BeanUtil.copyProperties(one,userDto,true);
+                //设置token
+                String token = TokenUtils.getToken(one.getId().toString(), one.getPassword());
+                userDto.setToken(token);
                 return userDto;
             }else {
                 throw new BusinessException(Constants.CODE_600,"用户名密码错误");
