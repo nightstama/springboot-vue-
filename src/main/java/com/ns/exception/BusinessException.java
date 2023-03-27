@@ -7,14 +7,14 @@ import lombok.extern.slf4j.Slf4j;
 @Getter
 public class BusinessException extends RuntimeException {
 
-    private final String code;
+    private final Long code;
 
-    public BusinessException(String code, String message) {
+    public BusinessException(Long code, String message) {
         super(message);
         this.code = code;
     }
 
-    public String getCode() {
+    public Long getCode() {
         return code;
     }
 

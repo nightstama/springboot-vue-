@@ -17,6 +17,16 @@
     <select id="findAll" resultType="com.ns.entity.SysUser">
         select * from sys_user
     </select>
+    <select id="getRoleMean" resultType="java.lang.String">
+        select role_mean from sys_role where role_id=#{id}
+    </select>
+    <select id="getRoleId" resultType="java.lang.String">
+        select role_id  from sys_role where role_mean=#{mean}
+    </select>
+    <select id="getAllRoleMean" resultType="java.lang.String">
+        select role_mean from ums.tab_sys_role
+    </select>
+
 
 
 </mapper>

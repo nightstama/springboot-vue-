@@ -1,26 +1,18 @@
 package com.ns;
 
 import cn.hutool.core.thread.ExecutorBuilder;
-import cn.hutool.core.thread.ThreadUtil;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.ns.dao.SysUserDao;
-import com.ns.entity.SysUser;
+import com.ns.mapper.SysUserMapper;
 import org.junit.jupiter.api.Test;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.List;
 import java.util.concurrent.*;
 
 @SpringBootTest
 class ManageSystemApplicationTests {
 
     @Resource
-    private SysUserDao userDao;
+    private SysUserMapper userDao;
 
     @Test
     void contextLoads() {

@@ -5,6 +5,12 @@ spring:
     generator:
       write_numbers_as_strings: true
     time-zone: GMT+8
+jwt:
+  header: Authorization
+  secret: mySecret
+  #token有效期一天
+  expiration: 86400
+  tokenHead: "Bearer "
 mybatis-plus:
   global-config:
     banner: false

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.ns.entity.SysUser;
+import com.ns.entity.auth.ResponseUserToken;
 import com.ns.entity.dto.SysUserDto;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -20,6 +21,5 @@ public interface SysUserService extends IService<SysUser> {
 
     boolean export(SysUser user);
 
-    SysUserDto login(SysUserDto userDto);
 }
 

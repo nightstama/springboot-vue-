@@ -3,23 +3,18 @@ package com.ns.controller;
 
 
 import cn.hutool.core.util.StrUtil;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.ns.common.Constants;
-import com.ns.common.Result;
+import com.ns.common.ResultData;
 import com.ns.entity.SysUser;
+import com.ns.entity.auth.ResponseUserToken;
 import com.ns.entity.dto.SysUserDto;
 import com.ns.service.SysUserService;
 import com.ns.service.UploadService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -111,24 +106,6 @@ public class SysUserController{
     public boolean export(SysUser user){
         return sysUserService.export(user);
     }
-
-    /**
-     * 登录
-     * @param userDto
-     * @return
-     */
-    @PostMapping("/login")
-    public Result login(@RequestBody SysUserDto userDto){
-        String username= userDto.getUsername();
-        String password= userDto.getPassword();
-        if (StrUtil.isBlank(username) || StrUtil.isBlank(password)){
-            return Result.error(Constants.CODE_400,"参数错误");
-        }
-        SysUserDto dto = sysUserService.login(userDto);
-        return Result.success(dto);
-
-    }
-
     /**
      * 上传文件
      */
