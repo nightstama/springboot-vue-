@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @SpringBootApplication
-@MapperScan(basePackages = {"com.ns.dao"})
+@MapperScan(basePackages = {"com.ns.mapper"})
 public class ManageSystemApplication {
 
 	public static void main(String[] args) {
