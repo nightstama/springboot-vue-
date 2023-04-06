@@ -12,23 +12,18 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ns.mapper.SysUserMapper;
 import com.ns.entity.SysUser;
-import com.ns.entity.auth.ResponseUserToken;
-import com.ns.entity.auth.UserDetail;
+
 import com.ns.entity.dto.SysUserDto;
 import com.ns.service.SysUserService;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.DisabledException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.annotation.Resource;
 import java.io.File;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
+
 
 /**
  * (SysUser)表服务实现类
@@ -49,7 +44,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         wrapper.like(user.getUsername()!=null,"username",user.getUsername());
         wrapper.like(user.getPhone()!=null,"phone",user.getPhone());
         wrapper.like(user.getAddress()!=null,"address",user.getAddress());
-        Page<SysUser> sysUserPage = sysUserDao.selectPage(new Page<>(user.getPageNum(),user.getPageSize()), wrapper);
+        Page<SysUser> sysUserPage = baseMapper.selectPage(new Page<>(user.getPageNum(),user.getPageSize()), wrapper);
         return sysUserPage;
     }
 

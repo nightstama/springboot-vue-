@@ -15,9 +15,4 @@ public class ManageSystemApplication {
 		SpringApplication.run(ManageSystemApplication.class, args);
 	}
 
-	@GetMapping("/")
-	public String index(){
-		return "ok";
-	}
-
 }

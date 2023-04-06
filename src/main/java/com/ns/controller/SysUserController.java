@@ -4,10 +4,10 @@ package com.ns.controller;
 
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.ns.common.ResultData;
 import com.ns.entity.SysUser;
-import com.ns.entity.auth.ResponseUserToken;
-import com.ns.entity.dto.SysUserDto;
+
 import com.ns.service.SysUserService;
 import com.ns.service.UploadService;
 import io.swagger.annotations.Api;
@@ -15,7 +15,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -41,16 +41,10 @@ public class SysUserController{
      */
     @ApiOperation(value = "管理员查询",notes = "查询管理员")
     @PostMapping("/page")
-    public Map<String,Object> search(@RequestBody SysUser user){
-        IPage<SysUser> page = sysUserService.search(user);
-        List<SysUser> data = page.getRecords();
-        Long total = page.getTotal();
-        Long pages = page.getPages();
-        Map<String, Object> res = new HashMap<>();
-        res.put("total", total);
-        res.put("pages", pages);
-        res.put("data", data);
-        return res;
+    public ResultData<IPage<SysUser>> search(@RequestBody SysUser user){
+        System.out.println("jj");
+
+        return new ResultData<>(sysUserService.search(user));
     }
 
     /**
