@@ -1,46 +1,31 @@
 server:
-  port: 9089
+  port: 9093
 spring:
   jackson:
     generator:
       write_numbers_as_strings: true
     time-zone: GMT+8
-  redis:
-    database: 0
-    host: 127.0.0.1
-    port: 6379
-    password:
-    timeout: 5000
-    pool:
-      max-active: 16
-      max-idle: 8
-      min-idle: 0
-      max-wait: -1
-#jwt:
-#  header: Authorization
-#  secret: mySecret
-#  #token有效期一天
-#  expiration: 86400
-#  tokenHead: "Bearer "
 mybatis-plus:
   global-config:
     banner: false
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 ali:
-  ossKey: LTAI5tGAQreYB1UJ8GSVkQvH
-  ossSecret: JtlN9qR5jXrRKBi1EZvsx31cfpJ8lY
+  ossKey: LTAI5tGowAKox4saTmmzXT2Y
+  ossSecret: gTdXc406440glMmzlg0h9NTpun0o18
+  ossRoleArn: acs:ram::1986255198766609:role/admin
+
 upload:
-  path: E:\test
+  path: /tmp/upload
 ---
 spring:
   datasource:
     username: root
     password: 123123
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/fkx?useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&useSSL=false&serverTimezone=GMT%2b8
+    url: jdbc:mysql://localhost:3306/ums?useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&useSSL=false&serverTimezone=GMT%2b8
 ---
 spring:
   mvc:
-    pathmatch:
+    path match:
       matching-strategy: ant_path_matcher
